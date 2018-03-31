@@ -51,16 +51,17 @@ var config = {
           var firstTrainTime = childSnapshot.val().firstTrainTime;
           var tfrequency = childSnapshot.val().frequency;
 
-          //Calculate next arriaval time
+          //to calculate when the next train is expected
           var currentTime = moment();
           var firstTrainTimeConverted = moment(firstTrainTime, "HH:mm");
           
-          //to calculate when the next train is expected
           var difference = moment().diff(firstTrainTimeConverted, "HH:mm"); 
           var remainder = difference % tfrequency;
           var minutesTillArrival=frequency-remainder;
           var nextETA = moment(currentTime+remainder).format("HH:mm");
           console.log(nextETA);
+
+          
 
                
           
