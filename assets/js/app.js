@@ -60,17 +60,19 @@ var config = {
           var minutesTillArrival=frequency-remainder;
           var nextETA = moment(currentTime+remainder).format("HH:mm");
           console.log(nextETA);
-
+        
+          //create and append html elements to hold the train info pulled from db
+          var tr=$("<tr>")
           
+          var tdName=$("<td>").text(trainName);
+          var tdDestination=$("<td>").text(destination);
+          var tdFrequency=$("<td>").text(tfrequency);
+          var tdNextArrival=$("<td>").text(nextETA);
+          var tdMinAway=$("<td>").text(minutesTillArrival);
 
-               
-          
+          tr.append(tdName, tdDestination, tdFrequency, tdNextArrival, tdMinAway);
 
-
-
-
-
-
+          $("#train-details").append(tr);
       })
 
 
