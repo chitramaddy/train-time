@@ -4,40 +4,35 @@
     margin: 0;
 }
 
-body{
+body {
     max-width: 960px;
     border: blueviolet 1px solid;
-    margin: 0 auto; 
+    margin: 0 auto;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.jumbotron{
-    background-image:url("../sawyer-bengtson-279792-unsplash.jpg");
+.jumbotron {
+    background-image: url("../images/sawyer-bengtson-279792-unsplash.jpg");
     text-align: center;
 }
 
-.card-header, tr{
-    background: royalblue;
-    color: black;
-}
-
 h1 {
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-font-size: 40px;
-color: lime; 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40px;
+    color: lime;
 }
 
-p{  
+p {
     font-size: 20px;
     font-style: italic;
-    color:  white;
-
+    color: white;
 }
 
-#train-details, card{
+#train-details,
+card {
     border: pink 1px solid;
 }
 
-#formTitle{
+#formTitle {
     background: rebeccapurple;
 }
