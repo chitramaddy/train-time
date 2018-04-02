@@ -16,7 +16,7 @@ var config = {
   $("#submit").on("click", function(event){
       event.preventDefault();
 
-      //take values from form inputs
+      //store values from form inputs in variables
       var trainName = $("#trainName").val();
       var destination = $("#destination").val();
       var firstTrainTime = $("#firstTrainTime").val();
@@ -41,25 +41,28 @@ var config = {
       //add the new train object to the database
       database.ref().push(addNewTrain);
 
-      //When a new train is added, display it on the table with name, destination, nextETA, 
+      //When a new train is added, display it on the table 
       database.ref().on("child_added", function(childSnapshot){
           console.log(childSnapshot.val());
 
           //Take values from database
           var trainName = childSnapshot.val().name;
           var destination = childSnapshot.val().destination;
-          var firstTrainTime = childSnapshot.val().firstTrainTime;
+          var firstTime = childSnapshot.val().firstTrainTime;
           var tfrequency = childSnapshot.val().frequency;
 
           //to calculate when the next train is expected
-          var currentTime = moment();
-          var firstTrainTimeConverted = moment(firstTrainTime, "HH:mm");
+          var firstTrainTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+          console.log(firstTrainTimeConverted);
+          var diffTime = moment().diff(firstTrainTimeConverted, "minutes");
+          console.log("diff in time "+ diffTime);
+          var remainder = diffTime % tfrequency;
+          console.log(remainder);
+          var minutesTillArrival = tfrequency-remainder;
+          console.log(minutesTillArrival);
+          var nextTrain = moment().add(minutesTillArrival, "minutes");
+          console.log(nextTrain.format("hh:mm"));                  
           
-          var difference = moment().diff(firstTrainTimeConverted, "HH:mm"); 
-          var remainder = difference % tfrequency;
-          var minutesTillArrival=frequency-remainder;
-          var nextETA = moment(currentTime+remainder).format("HH:mm");
-          console.log(nextETA);
         
           //create and append html elements to hold the train info pulled from db
           var tr=$("<tr>")
@@ -67,7 +70,7 @@ var config = {
           var tdName=$("<td>").text(trainName);
           var tdDestination=$("<td>").text(destination);
           var tdFrequency=$("<td>").text(tfrequency);
-          var tdNextArrival=$("<td>").text(nextETA);
+          var tdNextArrival=$("<td>").text(nextTrain);
           var tdMinAway=$("<td>").text(minutesTillArrival);
 
           tr.append(tdName, tdDestination, tdFrequency, tdNextArrival, tdMinAway);
