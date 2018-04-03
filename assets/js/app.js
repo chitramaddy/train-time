@@ -61,8 +61,8 @@ $(document).ready(function () {
             var minutesTillArrival = tfrequency - remainder;
             console.log(minutesTillArrival);
             var nextTrain = moment().add(minutesTillArrival, "minutes");
-            console.log(nextTrain.format("hh:mm"));
-
+            var nextTrainFormatted = moment(nextTrain).format("hh:mm");
+            console.log("next train arrival "+ nextTrain.format("hh:mm"));
 
             //create and append html elements to hold the train info pulled from db
             var tr = $("<tr>")
@@ -70,15 +70,13 @@ $(document).ready(function () {
             var tdName = $("<td>").text(trainName);
             var tdDestination = $("<td>").text(destination);
             var tdFrequency = $("<td>").text(tfrequency);
-            var tdNextArrival = $("<td>").text(nextTrain);
+            var tdNextArrival = $("<td>").text(nextTrainFormatted);
             var tdMinAway = $("<td>").text(minutesTillArrival);
 
             tr.append(tdName, tdDestination, tdFrequency, tdNextArrival, tdMinAway);
 
             $("#train-details").append(tr);
         })
-
-
     })
 });
 
